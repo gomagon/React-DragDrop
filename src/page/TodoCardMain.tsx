@@ -18,9 +18,18 @@ type ObjArrType = {
   droppableId: string;
   title: string;
   todoArrs: todoType[];
+  colorId: number;
 };
 type todoType = { id: string; draggableId: string; todo: string };
 export type ObjArrsType = ObjArrType[];
+
+const colors = [
+  { text: "#385399", bg: "#eee" },
+  { text: "#fff", bg: "#3e3e3e" },
+  { text: "#fff", bg: "#e5652e" },
+  { text: "#fff", bg: "#385399" },
+  { text: "#fff", bg: "#66923d" },
+];
 
 export const TodoCardMain: FC = memo(() => {
   const [allArr, setAllArr] = useState<ObjArrsType>([]);
@@ -94,6 +103,21 @@ export const TodoCardMain: FC = memo(() => {
 
   return (
     <div>
+      <div
+        style={{
+          verticalAlign: "left",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          marginLeft: "16px",
+        }}
+      >
+        <BoxAddButton allArr={allArr} setAllArr={setAllArr} />
+        <InitAllButton setUseIsLoading={setUseIsLoading} setAllArr={setAllArr}>
+          Init
+        </InitAllButton>
+      </div>
       <DragDropContext onDragEnd={onBoxDragEndBox}>
         <div
           style={{
@@ -111,12 +135,18 @@ export const TodoCardMain: FC = memo(() => {
               <div
                 key={obj.id}
                 style={{
-                  backgroundColor: "white",
+                  position: "fixed",
+                  top: "120px",
+                  left: `${4 + objIndex * 220}px`,
+                  backgroundColor: colors[obj.colorId].bg,
+                  color: colors[obj.colorId].text,
                   marginTop: "16px",
                   marginLeft: "16px",
                   borderRadius: "6px",
                   width: "200px",
                   padding: "4px 10px 10px 10px",
+                  transitionDuration: true ? "200ms" : "0ms",
+                  opacity: 0.8,
                 }}
               >
                 <div
@@ -206,13 +236,15 @@ export const TodoCardMain: FC = memo(() => {
                                         ? "red.200"
                                         : valIndex === 1
                                         ? "blue.200"
-                                        : "white.200"
+                                        : "white"
                                     }
+                                    color="blackAlpha.800"
                                     borderRadius={4}
                                     w={140}
                                     p={1}
                                     borderColor="gray.400"
                                     borderWidth={1}
+                                    opacity="0.8"
                                   >
                                     {val.todo}
                                   </Text>
@@ -236,24 +268,6 @@ export const TodoCardMain: FC = memo(() => {
               </div>
             )
           )}
-          <div
-            style={{
-              verticalAlign: "left",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-              marginLeft: "16px",
-            }}
-          >
-            <BoxAddButton allArr={allArr} setAllArr={setAllArr} />
-            <InitAllButton
-              setUseIsLoading={setUseIsLoading}
-              setAllArr={setAllArr}
-            >
-              Init
-            </InitAllButton>
-          </div>
         </div>
       </DragDropContext>
     </div>
