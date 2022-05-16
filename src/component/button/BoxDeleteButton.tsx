@@ -24,7 +24,7 @@ export const BoxDeleteButton: FC<Props> = memo((props) => {
       onClick={onBoxDeleteButton}
       color="red"
       fontSize="lg"
-      bgColor="white"
+      bgColor="transparent"
       _hover={{ background: "ghost" }}
     >
       ×

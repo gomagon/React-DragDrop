@@ -15,13 +15,14 @@ export const BoxAddButton: FC<Props> = memo((props) => {
 
   const onBoxAddButton = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (allArr !== undefined) {
+      if (allArr !== undefined && allArr.length < 5) {
         allArr.push({
           id: `${count.current}`,
           draggableId: `drag${count.current}`,
           droppableId: `drop${count.current}`,
           title: `Title${count.current}`,
           todoArrs: [],
+          colorId: count.current % 5,
         });
         setAllArr([...allArr]);
         e.currentTarget.blur();
@@ -35,11 +36,12 @@ export const BoxAddButton: FC<Props> = memo((props) => {
     <IconButton
       onClick={(e) => onBoxAddButton(e)}
       size="lg"
-      my={10}
+      my={4}
       borderRadius="full"
       icon={<PlusSquareIcon />}
       _hover={{ background: "ghost" }}
       aria-label="deleteBoxIcon"
+      colorScheme="#666"
     />
   );
 });

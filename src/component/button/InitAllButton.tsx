@@ -22,6 +22,7 @@ export const InitAllButton: FC<Props> = memo((props) => {
             droppableId: "drop0",
             title: "default",
             todoArrs: [],
+            colorId: 0,
           },
         ],
       ]);
@@ -38,15 +39,19 @@ export const InitAllButton: FC<Props> = memo((props) => {
       onClick={initAllButton}
       size="lg"
       color="white"
-      bg="rgb(50,196,233)"
-      borderColor="rgb(50,196,233)"
+      bg="#666"
+      borderColor="#666"
+      my={4}
+      ml={4}
       borderWidth={2}
       borderRadius={6}
       transition="all .6s"
+      opacity="0.7"
       _hover={{
-        color: "rgb(50,196,233)",
+        color: "#3e3e3e",
         bg: "white",
-        borderColor: "rgb(50,196,233)",
+        borderColor: "#3e3e3e",
+        opacity: 0.5,
       }}
     >
       Init
